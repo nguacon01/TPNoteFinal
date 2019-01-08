@@ -35,7 +35,7 @@ public class DNA extends Sequence {
                 break;
             }
         }
-        System.out.println("codon start at position: "+pos);ad
+        System.out.println("codon start at position: "+pos);
 
         while(pos < this.seqSymbol.length()-3) {
 			if(this.seqSymbol.length() < 3) {
