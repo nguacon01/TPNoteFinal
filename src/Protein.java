@@ -19,14 +19,26 @@ public class Protein extends Sequence {
         return masse;
     }
 
+    /*
+        estimerCharge
+        @param: double pH
+        @return charge of protein
+     */
     private double estimerCharge(double pH) {
         double charge = 0;
-        double pKa;
         double r;
         for(int i=0; i<this.seqSymbol.length();i++) {
-            pKa = Util.pKa_AMINO_ACIDS.get(this.seqSymbol.charAt(i));
+            /*
+            find the charge of amino acid at position i in the sequence
+            use HashMap pKa_AMINO_ACIDS.
+             */
+            double pKa = Util.pKa_AMINO_ACIDS.get(this.seqSymbol.charAt(i));
             if(pKa != 0){
                 r = Math.pow(10,pH-pKa) / (Math.pow(10,pH-pKa) +1.0);
+                /*
+                check if amino acid is a acid
+                use HashMap IS_ACID_AA
+                 */
                 if(Util.IS_ACID_AA.get(this.seqSymbol.charAt(i))) {
                     charge+=-1.0*r;
                 }else {

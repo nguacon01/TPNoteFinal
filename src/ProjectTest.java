@@ -45,5 +45,6 @@ public class ProjectTest {
         PairwiseAlignment nw = new NeedlemanWunsch(s1,s2,"PROTEIN");
 //		 nw. aligneSequences () ;
         System.out.println ( nw ) ;
+        protein.estimerPointIsoElectrique();
     }
 }
