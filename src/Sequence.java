@@ -1,9 +1,15 @@
+
+/*
+ * Copyright (c) 2019. DO Manh Dung - M1 BSIB
+ * Class Sequence
+ */
+
 import java.util.Map;
 
 public abstract class Sequence {
-    public String seqSymbol;
-    public String type;
-    public int longeur;
+    private String seqSymbol;
+    private String type;
+    private int longeur;
     /*
      * Constructor
      */
@@ -57,6 +63,7 @@ public abstract class Sequence {
      * @param:Map<Character,Double> map and Character symbol
      */
     public double getMassMoleculaire(Map<Character,Double> map, Character symbol) {
+//        System.out.println(symbol+" - "+map.get(symbol));
         return map.get(symbol);
     }
 }

@@ -1,7 +1,13 @@
+/*
+ * Copyright (c) 2019. DO Manh Dung - M1 BSIB
+ * Class Protein
+ */
+
 public class Protein extends Sequence {
+    String sequence = getSeqSymbol();
     public Protein(String seqSymbol) {
         super(seqSymbol);
-        this.type = "PROTEIN";
+        setType("PROTEIN");
     }
     /*
     calculate mass of molecules
@@ -9,10 +15,10 @@ public class Protein extends Sequence {
      */
     public double massMoleculaire() {
         double masse = 18.02;
-        int seqLength = this.seqSymbol.length();
+        int seqLength = getSeqSymbol().length();
         if(seqLength > 0) {
             for(int i=0;i<seqLength;i++) {
-                char symbol = this.seqSymbol.charAt(i);
+                char symbol = getSeqSymbol().charAt(i);
                 masse = masse + getMassMoleculaire(Util.AMINOACIDS_MOLECULAR_MASSES, symbol);
             }
         }
@@ -25,21 +31,22 @@ public class Protein extends Sequence {
         @return charge of protein
      */
     private double estimerCharge(double pH) {
+
         double charge = 0;
         double r;
-        for(int i=0; i<this.seqSymbol.length();i++) {
+        for(int i=0; i < sequence.length();i++) {
             /*
             find the charge of amino acid at position i in the sequence
             use HashMap pKa_AMINO_ACIDS.
              */
-            double pKa = Util.pKa_AMINO_ACIDS.get(this.seqSymbol.charAt(i));
-            if(pKa != 0){
+            if(Util.pKa_AMINO_ACIDS.containsKey(sequence.charAt(i))){
+                double pKa = Util.pKa_AMINO_ACIDS.get(sequence.charAt(i));
                 r = Math.pow(10,pH-pKa) / (Math.pow(10,pH-pKa) +1.0);
                 /*
                 check if amino acid is a acid
                 use HashMap IS_ACID_AA
                  */
-                if(Util.IS_ACID_AA.get(this.seqSymbol.charAt(i))) {
+                if(Util.IS_ACID_AA.get(sequence.charAt(i))) {
                     charge+=-1.0*r;
                 }else {
                     charge+=1-r;
@@ -66,6 +73,7 @@ public class Protein extends Sequence {
                 }
             }
         }
+        System.out.println(estimerCharge(pH));
         return pH;
     }
 }

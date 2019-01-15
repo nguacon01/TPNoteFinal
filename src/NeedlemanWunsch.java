@@ -1,10 +1,19 @@
+/*
+ * Copyright (c) 2019. DO Manh Dung - M1 BSIB
+ * Class NeedlemanWunsch
+ */
+
 public class NeedlemanWunsch extends PairwiseAlignment {
+    int length1 = getLength1();
+    int length2 = getLength2();
+    Sequence seq1 = getSeq1();
+    Sequence seq2 = getSeq2();
     int row = length1+1;
     int column = length2+1;
     /*
      * matrixScore
      */
-    private int[][] matrixScore = new int[row][column];;
+    private int[][] matrixScore = new int[row][column];
     /*
      * 2 type "PROTEIN" or "DNA"
      */
@@ -35,20 +44,13 @@ public class NeedlemanWunsch extends PairwiseAlignment {
             matrixScore[0][j] = matrixScore[0][j - 1] + GAP;
         }
         /*
-         * the rest of matrix
+        we fill the rest of matrix with this function
+        fillMatrixScore
+        @params: matrixScore, row, column
+        return matrixScore has been full filled
          */
-        for(i=1;i<row;i++) {
-            for(j=1;j<column;j++) {
-                int diagScore = matrixScore[i - 1][j - 1] + similarity(i, j);
-                int upScore = matrixScore[i][j - 1] + GAP;
-                int leftScore = matrixScore[i - 1][j] + GAP;
+        matrixScore = fillMatrixScore(matrixScore, row, column);
 
-                /*
-                 * find the maximum point of diagScore, UpScore and LeftScore then fill it into matrix score at position [i][j]
-                 */
-                matrixScore[i][j] = Math.max(diagScore, Math.max(upScore,leftScore));
-            }
-        }
         System.out.println();
         /*
          * Print the matrix score
@@ -61,7 +63,6 @@ public class NeedlemanWunsch extends PairwiseAlignment {
      * trace back from position [i][j] to position [0][0]
      */
     public void aligneSequences() {
-        final char gapString = '-';
         int i = row-1;
         int j = column-1;
         String align1 = "";

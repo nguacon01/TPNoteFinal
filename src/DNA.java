@@ -1,7 +1,13 @@
+/*
+ * Copyright (c) 2019. DO Manh Dung - M1 BSIB
+ * Class DNA
+ */
+
 public class DNA extends Sequence {
+    String sequence = getSeqSymbol();
     public DNA(String seqSymbol) {
         super(seqSymbol);
-        this.type = "DNA";
+        setType("DNA");
     }
     /*
     calculate mass of molecules
@@ -27,19 +33,20 @@ public class DNA extends Sequence {
         /*
         Step 1: find the codon start ATG
          */
-        while(pos < this.seqSymbol.length()-3) {
+        while(pos < sequence.length()-3) {
             /*
             check that the sequence must have more than 3 nucleotides
              */
-			if(this.seqSymbol.length() < 3) {
+			if(sequence.length() < 3) {
 			    throw new InvalidCodonException("The sequence must have more than 3 nucleotides");
 			}
 			/*
 			a codon has 3 nucleotides
 			 */
-            codon = this.seqSymbol.substring(pos,pos+3).toUpperCase();
+            codon = sequence.substring(pos,pos+3).toUpperCase();
 			/*
 			 ATG: codon start.
+			 if it is not codon start, we move forward one nucleotide. If it is nucleotide, we get out the loop, and found codon Start.
 			  */
             if(codon.contentEquals("ATG")==false){
                 pos=pos+1;
@@ -53,12 +60,12 @@ public class DNA extends Sequence {
         step 2: translate codon into acid amine correspondent
         we start at position of codon start which found at step 1, to the nucleotide at position (seqSymbol.length()-3)
          */
-        while(pos < this.seqSymbol.length()-3) {
-			if(this.seqSymbol.length() < 3) {
+        while(pos < sequence.length()-3) {
+			if(sequence.length() < 3) {
 				break;
 			}
             pos+=3;
-            codon = this.seqSymbol.substring(pos,pos+3).toUpperCase();
+            codon = sequence.substring(pos,pos+3).toUpperCase();
             /*
             indicate codon stop. At codon stop, we stop translating.
              */

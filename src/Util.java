@@ -96,8 +96,8 @@ public class Util {
     /*
      * ==================================================================================================
      * MY UTIL
-     */
-    /*
+     *
+     *
      * Index amino acid in matrix blosum62
      */
     @SuppressWarnings("serial")
@@ -121,7 +121,7 @@ public class Util {
      * https://en.wikipedia.org/wiki/BLOSUM
      */
     public static final int[][] MatrixBlosum62 = {
-            /*	A   R	N	D	C	Q	E	G	H	I	L	K	M	F	P	S	T	W	Y	V*/
+                /*	A   R	N	D	C	Q	E	G	H	I	L	K	M	F	P	S	T	W	Y	V*/
             /*A*/ { 4, -1, -2, -2,  0, -1, -1,  0, -2, -1, -1, -1, -1, -2, -1,  1,  0, -3, -2,  0},
             /*R*/ {-1,  5,  0, -2, -3,  1,  0, -2,  0, -3, -2,  2, -1, -3, -2, -1, -1, -3, -2, -3},
             /*N*/ {-2,  0,  6,  1, -3,  0,  0,  0,  1, -3, -3,  0, -2, -3, -2,  1,  0, -4, -2, -3},
@@ -144,11 +144,12 @@ public class Util {
             /*V*/ { 0, -3, -3, -3, -1, -2, -2, -3, -3,  3,  1, -2,  1, -1, -2, -2,  0, -3, -1,  4}
     };
     /*
-     * Matrix blosum62
-     * https://en.wikipedia.org/wiki/BLOSUM
+     * Matrix of distance
+     * match: 3
+     * mismatch -3
      */
     public static final int[][] SubtitutionMatrix = {
-            /*	A   G	C	T	*/
+                /*	A   G	C	T	*/
             /*A*/ { 3, -3, -3, -3, },
             /*G*/ {-3,  3, -3, -3, },
             /*C*/ {-3, -3,  3, -3, },
@@ -157,7 +158,7 @@ public class Util {
     public static int getIndex(char a,String type) {
         int index;
         if(type != TYPE_DNA && type != TYPE_PROTEIN) {
-            throw new Error("Type de sequence is invalide!");
+            throw new Error("Type de sequence is invalid!");
         }
         if(type == TYPE_PROTEIN) {
             index = Util.AMINOACIDS_INDEX.get(a);
@@ -177,6 +178,5 @@ public class Util {
             return MatrixBlosum62[getIndex(a1,type)][getIndex(a2,type)];
         }
         return SubtitutionMatrix[getIndex(a1,type)][getIndex(a2,type)];
-
     }
 }

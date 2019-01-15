@@ -30,11 +30,11 @@ public class ProjectTest {
 
         System.out.println ( " \n PAIRWISE ALIGNMENT" ) ;
 
-//		 DNA s1 = new DNA ( "ccctaggtccca" );
-//		 DNA s2 = new DNA ( "cgggtatccaa" );
+		 DNA s1 = new DNA ( "ccctaggtccca" );
+		 DNA s2 = new DNA ( "cgggtatccaa" );
 
-        Sequence s1 = new DNA( "YIHTRYPTQPCRFGKLLLLLPALRSISPSTIEEVFFK" );
-        Sequence s2 = new DNA( "hskahhpsqpvrfgklllllpslrfitaeriellffr" );
+//        Sequence s1 = new DNA( "YIHTRYPTQPCRFGKLLLLLPALRSISPSTIEEVFFK" );
+//        Sequence s2 = new DNA( "hskahhpsqpvrfgklllllpslrfitaeriellffr" );
 
         System.out.println ( " \n SMITH WATERMAN" ) ;
         PairwiseAlignment sw = new SmithWaterman(s1,s2,"PROTEIN");
@@ -45,6 +45,6 @@ public class ProjectTest {
         PairwiseAlignment nw = new NeedlemanWunsch(s1,s2,"PROTEIN");
 //		 nw. aligneSequences () ;
         System.out.println ( nw ) ;
-        protein.estimerPointIsoElectrique();
+        System.out.println("Charge: " + protein.estimerPointIsoElectrique());
     }
 }

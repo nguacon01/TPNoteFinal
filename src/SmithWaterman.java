@@ -1,8 +1,17 @@
+/*
+ * Copyright (c) 2019. DO Manh Dung - M1 BSIB
+ * Class SmithWaterman
+ */
+
 public class SmithWaterman extends PairwiseAlignment {
     /*
      * array maxCoordSW
      * Store position i and j of the max score
      */
+    int length1 = getLength1();
+    int length2 = getLength2();
+    Sequence seq1 = getSeq1();
+    Sequence seq2 = getSeq2();
     int[] maxCoordSW = new int[2];
     int row = length1+1;
     int column = length2+1;
@@ -28,7 +37,6 @@ public class SmithWaterman extends PairwiseAlignment {
     public void buildMatrixScore() {
         int i;
         int j;
-        int max = 0;
         /*
          * first column
          */
@@ -42,21 +50,13 @@ public class SmithWaterman extends PairwiseAlignment {
             matrixScore[0][j] = 0;
         }
         /*
-         * the rest of matrix
+        we fill the rest of matrix with this function
+        fillMatrixScore
+        @params: matrixScore, row, column
+        return matrixScore has been full filled
          */
-        for(i=1;i<row;i++) {
-            for(j=1;j<column;j++) {
-                int diagScore = matrixScore[i - 1][j - 1] + similarity(i, j);
-                int upScore = matrixScore[i][j - 1] + GAP;
-                int leftScore = matrixScore[i - 1][j] + GAP;
+        matrixScore = fillMatrixScore(matrixScore, row, column);
 
-                /*
-                 * find the maximum point of diagScore, UpScore and LeftScore then fill it into matrix score at position [i][j]
-                 */
-                max = Math.max(diagScore, Math.max(upScore,Math.max(leftScore, 0)));
-                matrixScore[i][j] = max;
-            }
-        }
         System.out.println();
         /*
          * Print the matrix score
@@ -92,11 +92,13 @@ public class SmithWaterman extends PairwiseAlignment {
      * trace back from the maximum score to the 0
      */
     public void aligneSequences() {
-        final char gapString = '-';
         int i = maxCoordSW[0];
         int j = maxCoordSW[1];
         String align2 = "";
         String align1 = "";
+        /*
+        Trace back and add gap
+         */
         while(i-1>0 && j-1>0) {
             if(matrixScore[i][j]-similarity(i, j) == matrixScore[i-1][j-1]) {
                 align1 = align1 + seq1.getSeqSymbol().charAt(i-1);
@@ -115,7 +117,15 @@ public class SmithWaterman extends PairwiseAlignment {
             }else {
                 throw new Error("Fail");
             }
+            /*
+            when we got value of matrix at anywhere, we stop the alignment and rewrite the sequences after alignment
+             */
             if(matrixScore[i][j] == 0 || matrixScore[i-1][j-1] == 0 || matrixScore[i][j-1] == 0 || matrixScore[i-1][j] == 0) {
+                /*
+                trace back
+                Rewrite 2 sequence after alignment
+                reverse 2 sequence, use StringBuffer(arg).reverse().
+                 */
                 System.out.println(new StringBuffer(align1).reverse());
                 System.out.println(new StringBuffer(align2).reverse() );
                 return;
