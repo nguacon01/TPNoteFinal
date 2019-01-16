@@ -4,12 +4,12 @@
  */
 
 public class NeedlemanWunsch extends PairwiseAlignment {
-    int length1 = getLength1();
-    int length2 = getLength2();
-    Sequence seq1 = getSeq1();
-    Sequence seq2 = getSeq2();
-    int row = length1+1;
-    int column = length2+1;
+    private int length1 = getLength1();
+    private int length2 = getLength2();
+    private Sequence seq1 = getSeq1();
+    private Sequence seq2 = getSeq2();
+    private int row = length1+1;
+    private int column = length2+1;
     /*
      * matrixScore
      */

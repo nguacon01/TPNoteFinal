@@ -63,7 +63,6 @@ public abstract class Sequence {
      * @param:Map<Character,Double> map and Character symbol
      */
     public double getMassMoleculaire(Map<Character,Double> map, Character symbol) {
-//        System.out.println(symbol+" - "+map.get(symbol));
         return map.get(symbol);
     }
 }

@@ -78,8 +78,13 @@ public abstract class PairwiseAlignment {
     abstract void aligneSequences();
     abstract void buildMatrixScore();
 
-
-    public int[][] fillMatrixScore(int [][] matrix, int row, int column){
+    /*
+    fillMatrixScore
+    @param: int[][] matrixScore, int row, int column
+    @return: matrixScore
+    This function help us to fill all the value in the matrix score
+     */
+    public int[][] fillMatrixScore(int [][] matrixScore, int row, int column){
         int i;
         int j;
         /*
@@ -87,16 +92,16 @@ public abstract class PairwiseAlignment {
          */
         for(i=1;i<row;i++) {
             for(j=1;j<column;j++) {
-                int diagScore = matrix[i - 1][j - 1] + similarity(i, j);
-                int upScore = matrix[i][j - 1] + GAP;
-                int leftScore = matrix[i - 1][j] + GAP;
+                int diagScore = matrixScore[i - 1][j - 1] + similarity(i, j);
+                int upScore = matrixScore[i][j - 1] + GAP;
+                int leftScore = matrixScore[i - 1][j] + GAP;
                 /*
                  * find the maximum point of diagScore, UpScore and LeftScore then fill it into matrix score at position [i][j]
                  */
-                matrix[i][j] = Math.max(diagScore, Math.max(upScore,Math.max(leftScore, 0)));
+                matrixScore[i][j] = Math.max(diagScore, Math.max(upScore,Math.max(leftScore, 0)));
             }
         }
-        return matrix;
+        return matrixScore;
     }
 
     /*

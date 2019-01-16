@@ -19,7 +19,9 @@ public class Protein extends Sequence {
         if(seqLength > 0) {
             for(int i=0;i<seqLength;i++) {
                 char symbol = getSeqSymbol().charAt(i);
-                masse = masse + getMassMoleculaire(Util.AMINOACIDS_MOLECULAR_MASSES, symbol);
+                if(Util.AMINOACIDS_MOLECULAR_MASSES.containsKey(symbol)) {
+                    masse = masse + getMassMoleculaire(Util.AMINOACIDS_MOLECULAR_MASSES, symbol);
+                }
             }
         }
         return masse;
@@ -73,7 +75,7 @@ public class Protein extends Sequence {
                 }
             }
         }
-        System.out.println(estimerCharge(pH));
+//        System.out.println(estimerCharge(pH));
         return pH;
     }
 }

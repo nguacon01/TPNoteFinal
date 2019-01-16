@@ -8,13 +8,13 @@ public class SmithWaterman extends PairwiseAlignment {
      * array maxCoordSW
      * Store position i and j of the max score
      */
-    int length1 = getLength1();
-    int length2 = getLength2();
-    Sequence seq1 = getSeq1();
-    Sequence seq2 = getSeq2();
-    int[] maxCoordSW = new int[2];
-    int row = length1+1;
-    int column = length2+1;
+    private int length1 = getLength1();
+    private int length2 = getLength2();
+    private Sequence seq1 = getSeq1();
+    private Sequence seq2 = getSeq2();
+    private int[] maxCoordSW = new int[2];
+    private int row = length1+1;
+    private int column = length2+1;
     /*
      * matrixScore
      */
