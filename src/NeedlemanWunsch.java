@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. DO Manh Dung - M1 BSIB
  * Class NeedlemanWunsch
+ * chekc out
  */
 
 public class NeedlemanWunsch extends PairwiseAlignment {
